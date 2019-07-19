@@ -13,6 +13,8 @@ class VideoMonitor:
         self.video_id = video_id
 
     def get_readings(self):
+        print('Reading video {}'.format(self.video_id))
+
         body = requests.get("https://www.youtube.com/watch?v={}".format(self.video_id))
         soup = BeautifulSoup(body.content, "html.parser")
 
