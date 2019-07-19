@@ -5,10 +5,7 @@ import urllib
 from bs4 import BeautifulSoup
 
 from youtube_monitor.models import *
-
-
-def parse_integer(text):
-    return int("".join(filter(lambda c: c != ",", text)))
+from youtube_monitor.utils import parse_integer
 
 
 class VideoMonitor:

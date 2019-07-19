@@ -1,1 +1,2 @@
+from youtube_monitor.channel_monitor import ChannelMonitor
 from youtube_monitor.video_monitor import VideoMonitor

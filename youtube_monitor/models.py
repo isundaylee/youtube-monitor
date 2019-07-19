@@ -1,6 +1,13 @@
 import peewee
 
 
+class ChannelReading(peewee.Model):
+    time = peewee.DateTimeField()
+    channel_id = peewee.TextField()
+    name = peewee.TextField()
+    subscribers = peewee.IntegerField()
+
+
 class VideoReading(peewee.Model):
     time = peewee.DateTimeField()
     channel_id = peewee.TextField()
@@ -13,5 +20,5 @@ class VideoReading(peewee.Model):
 
 
 def initialize_database(db):
-    db.bind([VideoReading])
-    db.create_tables([VideoReading])
+    db.bind([ChannelReading, VideoReading])
+    db.create_tables([ChannelReading, VideoReading])

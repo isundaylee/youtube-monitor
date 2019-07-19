@@ -1,6 +1,6 @@
 import peewee
 
-from youtube_monitor import VideoMonitor
+from youtube_monitor import ChannelMonitor, VideoMonitor
 from youtube_monitor.models import initialize_database
 
 DATABASE_PATH = "data.db"
@@ -11,7 +11,8 @@ def main():
     initialize_database(db)
 
     test_video_id = "FiyJf-8lMmo"
-    monitor = VideoMonitor(test_video_id)
+    test_channel_id = 'UCdXqCN_HtF_RjlsHzDSnJIQ'
+    monitor = ChannelMonitor(test_channel_id)
 
     for reading in monitor.get_readings():
         reading.save()
