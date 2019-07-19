@@ -3,6 +3,7 @@ import peewee
 
 class VideoReading(peewee.Model):
     time = peewee.DateTimeField()
+    channel_id = peewee.TextField()
     video_id = peewee.TextField()
     title = peewee.TextField()
     available = peewee.BooleanField()

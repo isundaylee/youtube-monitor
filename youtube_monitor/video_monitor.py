@@ -19,6 +19,7 @@ class VideoMonitor:
         body = requests.get(self.url)
         soup = BeautifulSoup(body.content, "html.parser")
 
+        channel_id = soup.select_one('.yt-user-info a')['href'].split('/')[-1]
         video_id = urllib.parse.parse_qs(urllib.parse.urlparse(self.url).query)["v"][0]
         title = soup.select_one("title").text
 
@@ -33,6 +34,7 @@ class VideoMonitor:
         return [
             VideoReading(
                 time=datetime.datetime.now(),
+                channel_id=channel_id,
                 video_id=video_id,
                 title=title,
                 available=True,
