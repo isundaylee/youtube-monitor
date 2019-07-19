@@ -1,5 +1,6 @@
 import requests
 import datetime
+import urllib
 
 from bs4 import BeautifulSoup
 
@@ -18,6 +19,9 @@ class VideoMonitor:
         body = requests.get(self.url)
         soup = BeautifulSoup(body.content, "html.parser")
 
+        video_id = urllib.parse.parse_qs(urllib.parse.urlparse(self.url).query)["v"][0]
+        title = soup.select_one("title").text
+
         views = int(soup.select_one("meta[itemprop=interactionCount]")["content"])
         likes = parse_integer(
             soup.select_one(".like-button-renderer-like-button-unclicked span").text
@@ -28,8 +32,9 @@ class VideoMonitor:
 
         return [
             VideoReading(
-                url=self.url,
                 time=datetime.datetime.now(),
+                video_id=video_id,
+                title=title,
                 available=True,
                 views=views,
                 likes=likes,

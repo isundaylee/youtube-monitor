@@ -3,11 +3,12 @@ import peewee
 
 class VideoReading(peewee.Model):
     time = peewee.DateTimeField()
-    url = peewee.TextField()
+    video_id = peewee.TextField()
+    title = peewee.TextField()
     available = peewee.BooleanField()
-    views = peewee.IntegerField()
-    likes = peewee.IntegerField()
-    dislikes = peewee.IntegerField()
+    views = peewee.IntegerField(null=True)
+    likes = peewee.IntegerField(null=True)
+    dislikes = peewee.IntegerField(null=True)
 
 
 def initialize_database(db):
