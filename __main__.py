@@ -10,8 +10,8 @@ def main():
     db = peewee.SqliteDatabase(DATABASE_PATH)
     initialize_database(db)
 
-    test_url = "https://www.youtube.com/watch?v=FiyJf-8lMmo"
-    monitor = VideoMonitor(test_url)
+    test_video_id = "FiyJf-8lMmo"
+    monitor = VideoMonitor(test_video_id)
 
     for reading in monitor.get_readings():
         reading.save()

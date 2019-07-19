@@ -12,15 +12,14 @@ def parse_integer(text):
 
 
 class VideoMonitor:
-    def __init__(self, url):
-        self.url = url
+    def __init__(self, video_id):
+        self.video_id = video_id
 
     def get_readings(self):
-        body = requests.get(self.url)
+        body = requests.get("https://www.youtube.com/watch?v={}".format(self.video_id))
         soup = BeautifulSoup(body.content, "html.parser")
 
-        channel_id = soup.select_one('.yt-user-info a')['href'].split('/')[-1]
-        video_id = urllib.parse.parse_qs(urllib.parse.urlparse(self.url).query)["v"][0]
+        channel_id = soup.select_one(".yt-user-info a")["href"].split("/")[-1]
         title = soup.select_one("title").text
 
         views = int(soup.select_one("meta[itemprop=interactionCount]")["content"])
@@ -35,7 +34,7 @@ class VideoMonitor:
             VideoReading(
                 time=datetime.datetime.now(),
                 channel_id=channel_id,
-                video_id=video_id,
+                video_id=self.video_id,
                 title=title,
                 available=True,
                 views=views,
